@@ -5,6 +5,17 @@ import { ChartType } from '../types';
 const formatDate = (value: any): string => {
   try {
     if (value instanceof Date) {
+      // Handle both date and datetime
+      const hasTime = value.getHours() !== 0 || value.getMinutes() !== 0 || value.getSeconds() !== 0;
+      if (hasTime) {
+        return value.toLocaleString('tr-TR', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
       return value.toLocaleDateString('tr-TR', {
         year: 'numeric',
         month: '2-digit',
@@ -15,6 +26,16 @@ const formatDate = (value: any): string => {
     if (typeof value === 'number' && value > 1 && value < 47483) {
       const date = new Date((value - (25567 + 2)) * 86400 * 1000);
       if (!isNaN(date.getTime())) {
+        const hasTime = date.getHours() !== 0 || date.getMinutes() !== 0 || date.getSeconds() !== 0;
+        if (hasTime) {
+          return date.toLocaleString('tr-TR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        }
         return date.toLocaleDateString('tr-TR', {
           year: 'numeric',
           month: '2-digit',
@@ -26,6 +47,16 @@ const formatDate = (value: any): string => {
     if (typeof value === 'string') {
       const parsedDate = new Date(value);
       if (!isNaN(parsedDate.getTime())) {
+        const hasTime = parsedDate.getHours() !== 0 || parsedDate.getMinutes() !== 0 || parsedDate.getSeconds() !== 0;
+        if (hasTime) {
+          return parsedDate.toLocaleString('tr-TR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        }
         return parsedDate.toLocaleDateString('tr-TR', {
           year: 'numeric',
           month: '2-digit',
